@@ -1,0 +1,12 @@
+<!DOCTYPE resources [
+    <!ENTITY appname "StandardApplicationRnD">
+    <!ENTITY author "Asif@Rahat">
+    ]>
+<resources>
+    <string name="app_name">&appname;</string>
+    <string name="title_share_app">Share &appname;</string>
+    <string name="err_gmail_not_found">Gmail is not installed in your phone</string>
+    <string name="err_no_recipients">No recipients provided</string>
+    <string name="err_no_sub_gmail">Message can not be sent without subject</string>
+    <string name="title_share_via">Share via</string>
+</resources>
