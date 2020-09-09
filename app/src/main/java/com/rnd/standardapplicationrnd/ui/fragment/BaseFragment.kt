@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.rahat.standardapplicationrnd.ui.fragment
+package com.rnd.standardapplicationrnd.ui.fragment
 
 import android.app.Activity
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.rahat.standardapplicationrnd.ui.activity
+package com.rnd.standardapplicationrnd.ui.activity
 
 import android.os.Bundle
 import android.os.PersistableBundle

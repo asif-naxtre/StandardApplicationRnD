@@ -1,4 +1,4 @@
-package com.rahat.standardapplicationrnd
+package com.rnd.standardapplicationrnd
 
 import org.junit.Test
 

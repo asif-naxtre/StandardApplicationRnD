@@ -1,13 +1,13 @@
 @file:Suppress("unused")
 
-package com.rahat.standardapplicationrnd.ui.dialog
+package com.rnd.standardapplicationrnd.util
 
 import android.app.AlertDialog
 import android.content.Context
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import com.rahat.standardapplicationrnd.kotlin_extension.layoutInflater
+import com.rnd.standardapplicationrnd.kotlin_extension.layoutInflater
 
 object DialogUtil {
 

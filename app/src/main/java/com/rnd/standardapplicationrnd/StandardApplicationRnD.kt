@@ -1,4 +1,4 @@
-package com.rahat.standardapplicationrnd
+package com.rnd.standardapplicationrnd
 
 import android.app.Application
 import com.squareup.leakcanary.LeakCanary

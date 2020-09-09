@@ -1,6 +1,6 @@
-package com.rahat.standardapplicationrnd.ui.activity
+package com.rnd.standardapplicationrnd.ui.activity
 
-import com.rahat.standardapplicationrnd.R
+import com.rnd.standardapplicationrnd.R
 
 class MainActivity : BaseActivity() {
 

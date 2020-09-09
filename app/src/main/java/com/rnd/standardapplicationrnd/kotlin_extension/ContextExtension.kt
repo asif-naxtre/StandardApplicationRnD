@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.rahat.standardapplicationrnd.kotlin_extension
+package com.rnd.standardapplicationrnd.kotlin_extension
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -14,8 +14,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.rahat.standardapplicationrnd.R
-import com.rahat.standardapplicationrnd.ui.dialog.DialogUtil
+import com.rnd.standardapplicationrnd.R
 
 fun Context.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()

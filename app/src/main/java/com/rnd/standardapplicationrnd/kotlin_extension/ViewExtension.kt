@@ -1,5 +1,5 @@
 @file:Suppress("unused")
-package com.rahat.standardapplicationrnd.kotlin_extension
+package com.rnd.standardapplicationrnd.kotlin_extension
 
 import android.view.View
 import com.google.android.material.floatingactionbutton.FloatingActionButton
