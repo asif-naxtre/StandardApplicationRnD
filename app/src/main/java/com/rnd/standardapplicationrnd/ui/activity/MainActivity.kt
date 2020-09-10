@@ -7,6 +7,7 @@ class MainActivity : BaseActivity() {
     override fun getLayout(): Int = R.layout.activity_main
 
     override fun initialSetUp() {
+
     }
 
     override fun setUIData() {
@@ -16,5 +17,4 @@ class MainActivity : BaseActivity() {
     override fun setUIListener() {
 
     }
-
 }

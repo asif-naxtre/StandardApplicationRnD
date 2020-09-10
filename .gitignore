@@ -1,5 +1,9 @@
 *.iml
 .gradle
+/KEY
+/KEY/*
+keystore.properties
+/app/release
 /local.properties
 /.idea/caches
 /.idea/libraries

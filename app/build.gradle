@@ -3,6 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
+// Load keystore
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
@@ -17,10 +22,31 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    signingConfigs {
+        release {
+            try {
+                storeFile file(keystoreProperties['STORE_FILE'])
+                storePassword keystoreProperties['KEYSTORE_PASSWORD']
+                keyAlias keystoreProperties['ALIAS']
+                keyPassword keystoreProperties['KEY_PASSWORD']
+            } catch (exception) {
+                exception.printStackTrace()
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+
     buildTypes {
         debug {
+            //crashlytics enable/disable
             ext.alwaysUpdateBuildId = false
+            //png optimization enable/disable
             aaptOptions.cruncherEnabled = false
+            crunchPngs false
+            //multiple apk build enable/disable
+            splits.abi.enable = false
+            splits.density.enable = false
         }
         release {
             minifyEnabled true
@@ -28,6 +54,7 @@ android {
         }
     }
 }
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
