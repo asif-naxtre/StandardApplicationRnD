@@ -7,6 +7,5 @@ class StandardApplicationRnD : Application(){
 
     override fun onCreate() {
         super.onCreate()
-        LeakCanary.install(this)
     }
 }

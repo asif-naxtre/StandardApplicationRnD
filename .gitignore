@@ -3,6 +3,7 @@
 /KEY
 /KEY/*
 keystore.properties
+apis.properties
 /app/release
 /local.properties
 /.idea/caches

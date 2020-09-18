@@ -16,25 +16,57 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.rnd.standardapplicationrnd.R
 
-fun Context.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
+/**
+ * Methods can be called from anywhere, where context is available.
+ * */
+
+/**
+ * This method will show toast with given message for the given time span
+ * @param message :message that you want to show in toast
+ * @param length :time span for the toast, default value is <b>Toast.LENGTH_SHORT</b>
+ * */
+fun Context.showToast(message: String, length: Int = Toast.LENGTH_SHORT)
+{
     Toast.makeText(this, message, length).show()
 }
 
-fun Context.showSneakBar(view: View, message: String, length: Int = Snackbar.LENGTH_SHORT) {
-    when (this) {
-        is Activity -> {
-            this.showSneakBar(message)
-        }
-        is Fragment -> {
-            (requireActivity() as Activity).showSneakBar(message)
-        }
-        else -> {
-            Snackbar.make(view, message, length).show()
+/**
+ * This method will show sneakBar, at given rootView or default window root
+ * @param rootView :this view must be provided
+ * if you want to show at a custom root else pass null value for default window as root
+ * @param message :message that you want to show in toast
+ * @param length :time span for the toast, default value is <b>Toast.LENGTH_SHORT</b>
+ * */
+fun Context.showSneakBar(
+    message: String,
+    length: Int = Snackbar.LENGTH_SHORT,
+    rootView: View? = null
+)
+{
+
+    if (rootView != null) {
+        Snackbar.make(rootView, message, length).show()
+    }else{
+        when (this) {
+            is Activity -> {
+                this.showSneakBar(message)
+            }
+            is Fragment -> {
+                (this.requireActivity() as Activity).showSneakBar(message)
+            }
         }
     }
 }
 
-fun Activity.showSneakBar(message: String, length: Int = Snackbar.LENGTH_SHORT) {
+
+/**
+ * This method will show sneakBar, at given rootView or default window root
+ * this will show sneakBar will show at default window as root
+ * @param message :message that you want to show in toast
+ * @param length :time span for the toast, default value is <b>Toast.LENGTH_SHORT</b>
+ * */
+fun Activity.showSneakBar(message: String, length: Int = Snackbar.LENGTH_SHORT)
+{
     try {
         val view = this.window.decorView.findViewById<View>(android.R.id.content)
         val snackbar = Snackbar
@@ -50,21 +82,43 @@ fun Activity.showSneakBar(message: String, length: Int = Snackbar.LENGTH_SHORT) 
     }
 }
 
-fun Fragment.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
+/**
+ * @property com.rnd.standardapplicationrnd.kotlin_extension.showToast()
+ * */
+fun Fragment.showToast(message: String, length: Int = Toast.LENGTH_SHORT)
+{
     this.requireContext().showToast(message, length)
 }
 
-fun Fragment.showSneakBar(view: View, message: String, length: Int = Snackbar.LENGTH_SHORT) {
-    this.requireContext().showSneakBar(view, message, length)
+
+/**
+ * @property com.rnd.standardapplicationrnd.kotlin_extension.showSneakBar()
+ * */
+fun Fragment.showSneakBar(
+    message: String,
+    length: Int = Snackbar.LENGTH_SHORT,
+    rootView: View? = null
+)
+{
+    this.requireContext().showSneakBar(message, length, rootView)
 }
 
+/**
+ * This will return
+ * @return LayoutInflater object.
+ * */
 val Context.layoutInflater: LayoutInflater
     get() = LayoutInflater.from(this)
 
 
-/*
-*
-* */
+/**
+ * This method will directly open the gmail application to send mail with
+ * @param recipients array of string, must be provied as it is minimum requirement
+ * @param subject string, must be provided as mail sent without subject are considered as spam
+ * @param body string, optional to provide, mails with blank body could be sent
+ * @param ccRecipients array of strings, optional to provide, mails with no cc recipient could be sent
+ * @param bccRecipients array of strings, optional to provide, mails with no bcc recipient could be sent
+ * */
 @Suppress("SpellCheckingInspection")
 @Throws(IllegalArgumentException::class)
 fun Context.sendGmail(
@@ -73,7 +127,8 @@ fun Context.sendGmail(
     body: String,
     ccRecipients: Array<String>? = null,
     bccRecipients: Array<String>? = null,
-) {
+)
+{
     require(recipients.isNotEmpty()) { getString(R.string.err_no_recipients) }
     require(subject.isNotBlank()) { getString(R.string.err_no_sub_gmail) }
     val intent = Intent(Intent.ACTION_SEND).apply {
@@ -92,8 +147,14 @@ fun Context.sendGmail(
     }
 }
 
-fun Context.shareApp() {
-    val playUrlPrefix="https://play.google.com/store/apps/details?id="
+/**
+ * This method provides the functionality to
+ * share the app, it open the share screen,with
+ * available apps to share the link for the app
+ * */
+fun Context.shareApp()
+{
+    val playUrlPrefix = "https://play.google.com/store/apps/details?id="
     val shareIntent = Intent(Intent.ACTION_SEND)
     shareIntent.type = "text/plain"
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.title_share_app))

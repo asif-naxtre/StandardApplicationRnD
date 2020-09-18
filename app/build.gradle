@@ -8,17 +8,28 @@ def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+// Load apis
+def apiStoreProperties = new Properties()
+apiStoreProperties.load(new FileInputStream(rootProject.file("apis.properties")))
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "30.0.2"
+    compileSdkVersion Integer.parseInt(project.APP_COMPILE_SDK_VERSION)
+    buildToolsVersion project.APP_BUILD_TOOL_VERSION
 
     defaultConfig {
-        applicationId "com.rahat.standardapplicationrnd"
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
 
+
+        /*API END POINTS*/
+        buildConfigField "String", "API_NEWS", "\"${apiStoreProperties['simple_test_api']}\""
+        /*API END POINTS*/
+
+        applicationId "com.rahat.standardapplicationrnd"
+        minSdkVersion Integer.parseInt(project.MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
+        versionCode Integer.parseInt(project.APP_VERSION_CODE)
+        versionName project.APP_VERSION_NAME
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -39,16 +50,28 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+
+            /*API BASE URLS*/
+            buildConfigField "String", "HOST_URL", "\"${apiStoreProperties['debug_base_url']}\""
+            /*END API BASE URLS*/
+
             //crashlytics enable/disable
-            ext.alwaysUpdateBuildId = false
+            //ext.alwaysUpdateBuildId = false
             //png optimization enable/disable
-            aaptOptions.cruncherEnabled = false
-            crunchPngs false
+            //aaptOptions.cruncherEnabled = false
+            //crunchPngs false
             //multiple apk build enable/disable
-            splits.abi.enable = false
-            splits.density.enable = false
+            //splits.abi.enable = false
+            //splits.density.enable = false
         }
         release {
+
+            /*API BASE URLS*/
+            buildConfigField "String", "HOST_URL", "\"${apiStoreProperties['live_base_url']}\""
+            /*END API BASE URLS*/
+
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -71,7 +94,19 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
 
     //leak canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    //releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    //testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+
+
+    // compulsory
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //for retrofit conversion
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    //okhttp interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.13.1'
+
+
 }
