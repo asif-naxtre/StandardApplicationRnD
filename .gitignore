@@ -1,9 +1,9 @@
 *.iml
 .gradle
-/KEY
-/KEY/*
-keystore.properties
-apis.properties
+#/KEY
+/KEY/StandardApplicationRnD_Info.txt
+#keystore.properties
+#apis.properties
 /app/release
 /local.properties
 /.idea/caches

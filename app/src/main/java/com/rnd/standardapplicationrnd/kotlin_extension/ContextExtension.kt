@@ -43,18 +43,10 @@ fun Context.showSneakBar(
     rootView: View? = null
 )
 {
-
     if (rootView != null) {
         Snackbar.make(rootView, message, length).show()
-    }else{
-        when (this) {
-            is Activity -> {
-                this.showSneakBar(message)
-            }
-            is Fragment -> {
-                (this.requireActivity() as Activity).showSneakBar(message)
-            }
-        }
+    }else if (this is Activity){
+        this.showSneakBar(message)
     }
 }
 
@@ -100,7 +92,7 @@ fun Fragment.showSneakBar(
     rootView: View? = null
 )
 {
-    this.requireContext().showSneakBar(message, length, rootView)
+    this.requireActivity().showSneakBar(message, length, rootView)
 }
 
 /**
