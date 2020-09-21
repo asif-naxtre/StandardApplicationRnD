@@ -1,11 +1,12 @@
 *.iml
 .gradle
-#/KEY
+/KEY
 /KEY/StandardApplicationRnD_Info.txt
-#keystore.properties
-#apis.properties
+keystore.properties
+apis.properties
 /app/release
 /local.properties
+app/release/*
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
